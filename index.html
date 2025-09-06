@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For You 💖</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas class="stars" id="stars"></canvas>
+  <div class="container">
+    <header>
+      <span class="badge">A little surprise ✨</span>
+      <span class="badge" id="date"></span>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero card">
+      <div class="hero-inner">
+        <div>
+          <h1 class="title">Hey <span id="Keerthana">Love</span>,</h1>
+          <p class="subtitle">I wrote some code to say something simple:</p>
+          <p class="title small-title">
+            <span class="type" id="typewriter"></span>
+          </p>
+          <div class="cta-row">
+            <button class="btn-primary" id="reasonsBtn">Open 7 Reasons 💌</button>
+            <button class="btn-ghost" id="timelineBtn">Our Story ⏳</button>
+          </div>
+          <p class="subtitle">Psst… type <b>L O V E</b> on your keyboard for a secret.</p>
+        </div>
+        <div class="polaroid">
+          <img id="heroPhoto" src="us4.jpg" alt="Us" />
+          <p>Press anywhere for confetti 🎉</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Playlist -->
+    <section class="card playlist-card">
+      <div>
+        <h3>Tiny Playlist</h3>
+        <p class="subtitle">Click a song to play in a new tab (add your own!).</p>
+        <div class="grid" id="playlist"></div>
+      </div>
+    </section>
+
+    <footer>
+      Made with ❤ + JavaScript. — <span id="signature">— Yours</span>
+    </footer>
+  </div>
+
+  <!-- Reasons Modal -->
+  <div class="overlay" id="reasonsModal">
+    <div class="modal">
+      <button class="close" data-close>Close ✖</button>
+      <h3>7 reasons I adore you</h3>
+      <div class="grid" id="reasonsGrid"></div>
+    </div>
+  </div>
+
+  <!-- Timeline Modal -->
+  <div class="overlay" id="timelineModal">
+    <div class="modal">
+      <button class="close" data-close>Close ✖</button>
+      <h3>Our Story</h3>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+
+  <!-- Secret Modal -->
+  <div class="overlay" id="secretModal">
+    <div class="modal">
+      <button class="close" data-close>Close ✖</button>
+      <h3>A secret just for you 💫</h3>
+      <p id="secretMsg">Forever is my favorite plan with you.</p>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+</body>
+</html>
