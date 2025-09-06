@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For You 💖</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b1020;
+      --card: #131936;
+      --ink: #f5f7ff;
+      --accent: #ff5ea4;
+      --accent2: #8ae6ff;
+      --muted: #b9c2ff;
+      --ring: rgba(255,94,164,.5);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0; background: radial-gradient(80% 80% at 50% 0%, #141a33 0%, #0b1020 60%, #070a16 100%);
+      font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+      overflow-x:hidden;
+    }
+    .stars{position:fixed;inset:0;pointer-events:none; background:transparent;}
+    .container{max-width:1100px;margin:0 auto;padding:24px;}
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0;
+    }
+    .badge{padding:6px 12px;border:1px solid #28306a;border-radius:999px;color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:22px; box-shadow:0 20px 60px rgba(0,0,0,.35);}
+    .hero{position:relative; overflow:hidden;}
+    .hero-inner{display:grid; grid-template-columns:1.2fr .8fr; gap:24px; padding:32px;}
+    .title{font-family:"DM Serif Display", serif; font-size:clamp(38px, 6vw, 72px); line-height:1.05; letter-spacing:.2px; margin:0;}
+    .subtitle{color:var(--muted); margin-top:8px}
+    .cta-row{display:flex; gap:12px; margin-top:18px}
+    button{appearance:none; border:none; cursor:pointer; font-weight:700; border-radius:16px; padding:14px 18px; font-size:15px}
+    .btn-primary{background:linear-gradient(135deg, var(--accent), #ff8bc4); color:#150616; box-shadow:0 8px 24px rgba(255,94,164,.35)}
+    .btn-ghost{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); color:var(--ink)}
+    .polaroid{
+      background:#0c122b; border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:12px; transform:rotate(2deg);
+      box-shadow:0 30px 60px rgba(0,0,0,.4);
+    }
+    .polaroid img{width:100%; border-radius:12px; display:block}
+    .polaroid p{font-size:13px; color:#dfe3ff; text-align:center; margin:.5rem 0 0}
+    .type{min-height:3ch; border-right:2px solid var(--accent); white-space:nowrap; overflow:hidden; display:inline-block; animation: caret 1s steps(1) infinite;}
+    @keyframes caret {50%{border-color: transparent}}.grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+.reason{padding:18px; border-radius:18px; border:1px solid rgba(255,255,255,.08); background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));}
+.reason h4{margin:0 0 6px 0}
+.timeline{position:relative; padding:16px 0 0 0}
+.timeline:before{content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background:linear-gradient(var(--accent), transparent)}
+.event{margin-left:26px; margin-bottom:14px;}
+.event .when{font-size:12px; color:var(--muted)}
+.event .what{font-weight:600}
+
+footer{opacity:.8; font-size:12px; text-align:center; padding:28px 0 18px}
+
+/* Floating hearts */
+.heart{position:fixed; font-size:18px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.6)); animation: floatUp 3.4s ease-in forwards;}
+@keyframes floatUp { to { transform: translateY(-120vh) scale(1.3); opacity:0 }}
+
+/* Reveal overlays */
+.overlay{position:fixed; inset:0; background:rgba(7,10,22,.88); display:none; align-items:center; justify-content:center; z-index:40}
+.overlay.show{display:flex}
+.modal{max-width:680px; width:92%; padding:26px; border-radius:22px; background:linear-gradient(180deg, #12183a, #0d1330); border:1px solid rgba(255,255,255,.12)}
+.modal h3{margin:0 0 8px 0; font-size:28px}
+.modal p{color:#dbe0ff}
+.close{position:absolute; top:18px; right:18px; background:transparent; border:1px solid rgba(255,255,255,.18); color:var(--ink); padding:8px 10px; border-radius:10px}
+
+/* Responsive */
+@media (max-width: 880px){
+  .hero-inner{grid-template-columns:1fr;}
+  .grid{grid-template-columns:1fr;}
+}
+
+  </style>
+</head>
+<body>
+  <canvas class="stars" id="stars"></canvas>
+  <div class="container">
+    <header>
+      <span class="badge">A little surprise ✨</span>
+      <span class="badge" id="date"></span>
+    </header><section class="hero card">
+  <div class="hero-inner">
+    <div>
+      <h1 class="title">Hey <span id="Keerthana">Love</span>,</h1>
+      <p class="subtitle">I wrote some code to say something simple:</p>
+      <p class="title" style="font-size:clamp(22px,3.5vw,36px); font-weight:600">
+        <span class="type" id="typewriter"></span>
+      </p>
+      <div class="cta-row">
+        <button class="btn-primary" id="reasonsBtn">Open 7 Reasons 💌</button>
+        <button class="btn-ghost" id="timelineBtn">Our Story ⏳</button>
+      </div>
+      <p class="subtitle" style="margin-top:10px">Psst… type <b>L O V E</b> on your keyboard for a secret.</p>
+    </div>
+    <div class="polaroid">
+      <img id="heroPhoto" src="us4.jpg" alt="Us" />
+      <p>Press anywhere for confetti 🎉</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:22px" class="card">
+  <div style="padding:22px">
+    <h3 style="margin:0 0 14px 0">Tiny Playlist</h3>
+    <p class="subtitle" style="margin-top:0">Click a song to play in a new tab (add your own!).</p>
+    <div class="grid" id="playlist"></div>
+  </div>
+</section>
+
+<footer>
+  Made with ❤ + JavaScript. — <span id="signature">— Yours</span>
+</footer>
+
+  </div>  <!-- Reasons Modal -->  <div class="overlay" id="reasonsModal">
+    <div class="modal">
+      <button class="close" data-close>Close ✖</button>
+      <h3>7 reasons I adore you</h3>
+      <div class="grid" id="reasonsGrid"></div>
+    </div>
+  </div>  <!-- Timeline Modal -->  <div class="overlay" id="timelineModal">
+    <div class="modal">
+      <button class="close" data-close>Close ✖</button>
+      <h3>Our Story</h3>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>  <!-- Secret Modal -->  <div class="overlay" id="secretModal">
+    <div class="modal">
+      <button class="close" data-close>Close ✖</button>
+      <h3>A secret just for you 💫</h3>
+      <p id="secretMsg">Forever is my favorite plan with you.</p>
+    </div>
+  </div>  <script>
+    // ======= CUSTOMIZE THIS JSON =========
+    const DATA = {
+      herName: "Keerthana",             // <-- her name here
+      yourName: "— Yours, Yoga",  // <-- your signature here
+      headline: "I love you",     // <-- main line for typewriter
+      heroPhoto: "",              // optional: link to a favorite photo
+      playlist: [
+        { title:"Perfect — Ed Sheeran", url:"https://youtu.be/2Vv-BfVoq4g" },
+        { title:"Tum Se Hi — Jab We Met", url:"https://youtu.be/jvj2wV0vOYU" },
+        { title:"Kadhal Sadugudu — Alaipayuthey", url:"https://youtu.be/fX9T2UVv-8A" }
+      ],
+      reasons: [
+        "You make every day lighter.",
+        "Your laugh is my favorite sound.",
+        "You believe in me when I wobble.",
+        "You turn simple moments into magic.",
+        "Your kindness inspires me to be better.",
+        "Adventures are better holding your hand.",
+        "With you, home is a person."
+      ],
+      timeline: [
+        { when: "Our first chat", what: "We talked like we’d known each other forever." },
+        { when: "First date", what: "Butterflies. Too many. Worth it." },
+        { when: "A tough day", what: "You stayed. That meant everything." },
+        { when: "Today", what: "Writing code to say: I choose you, always." }
+      ],
+      secret: "Plot twist: I’m learning to cook your favorite dish for our next date!"
+    }
+    // =====================================
+
+    // Typewriter
+    const typeEl = document.getElementById('typewriter');
+    const text = DATA.headline;
+    let i = 0; function type(){ if(i<=text.length){ typeEl.textContent = text.slice(0,i++); setTimeout(type, 90); } }
+
+    // Hearts/confetti on click
+    function spawnHeart(x, y){
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.style.left = x + 'px';
+      h.style.top = y + 'px';
+      h.textContent = ['💖','💘','💝','💗','💓'][Math.floor(Math.random()*5)];
+      h.style.transform = translate(-50%, -50%) scale(${.8 + Math.random()*1.2});
+      document.body.appendChild(h);
+      setTimeout(()=> h.remove(), 3400);
+    }
+    document.body.addEventListener('pointerdown', (e)=> spawnHeart(e.clientX, e.clientY));
+
+    // Simple starfield
+    const starCanvas = document.getElementById('stars');
+    const ctx = starCanvas.getContext('2d');
+    function resize(){ starCanvas.width = innerWidth; starCanvas.height = innerHeight; }
+    addEventListener('resize', resize); resize();
+    const stars = Array.from({length: 140}, _=>({
+      x: Math.random()*innerWidth,
+      y: Math.random()*innerHeight,
+      r: Math.random()*1.2 + .2,
+      s: Math.random()*0.6 + 0.2
+    }));
+    function drawStars(){
+      ctx.clearRect(0,0,starCanvas.width, starCanvas.height);
+      for(const s of stars){
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+        ctx.fillStyle = rgba(255,255,255,${0.5 + Math.random()*0.5});
+        ctx.fill();
+        s.y += s.s * 0.15; if(s.y>innerHeight) s.y = -5;
+      }
+      requestAnimationFrame(drawStars);
+    }
+    drawStars();
+
+    // Fill UI from DATA
+    document.getElementById('herName').textContent = DATA.herName || 'Love';
+    document.getElementById('signature').textContent = DATA.yourName || '— Yours';
+    if(DATA.heroPhoto){ document.getElementById('heroPhoto').src = DATA.heroPhoto }
+
+    // Date
+    document.getElementById('date').textContent = new Date().toLocaleDateString(undefined, {year:'numeric', month:'long', day:'numeric'});
+
+    // Playlist
+    const playlistEl = document.getElementById('playlist');
+    DATA.playlist.forEach((p)=>{
+      const a = document.createElement('a');
+      a.href = p.url; a.target = '_blank'; a.rel='noopener';
+      a.className = 'reason'; a.innerHTML = <h4>▶ ${p.title}</h4><div class="subtitle">Open on YouTube</div>
+      playlistEl.appendChild(a);
+    });
+
+    // Reasons modal
+    const reasonsGrid = document.getElementById('reasonsGrid');
+    DATA.reasons.forEach((r, idx)=>{
+      const d = document.createElement('div');
+      d.className = 'reason';
+      d.innerHTML = <h4>${idx+1}.</h4><div class="subtitle">${r}</div>;
+      reasonsGrid.appendChild(d);
+    });
+
+    // Timeline
+    const timeline = document.getElementById('timeline');
+    DATA.timeline.forEach(ev=>{
+      const d = document.createElement('div');
+      d.className = 'event';
+      d.innerHTML = <div class="when">${ev.when}</div><div class="what">${ev.what}</div>;
+      timeline.appendChild(d);
+    });
+
+    // Modals open/close
+    const $ = s=>document.querySelector(s);
+    const open = (id)=> $(id).classList.add('show');
+    const closeAll = ()=> document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('show'));
+    document.getElementById('reasonsBtn').onclick = ()=> open('#reasonsModal');
+    document.getElementById('timelineBtn').onclick = ()=> open('#timelineModal');
+    document.querySelectorAll('[data-close]').forEach(btn=> btn.onclick = closeAll);
+    document.addEventListener('keydown', (e)=> e.key==='Escape' && closeAll());
+
+    // Secret: type L O V E
+    const secret = ['l','o','v','e'];
+    let buffer = [];
+    addEventListener('keydown', (e)=>{
+      buffer.push(e.key.toLowerCase());
+      if(buffer.join('').includes(secret.join(''))){
+        document.getElementById('secretMsg').textContent = DATA.secret;
+        open('#secretModal'); buffer = [];
+      }
+      if(buffer.length>8) buffer.shift();
+    });
+
+    // Start typewriter
+    type();
+  </script></body>
+</html>
